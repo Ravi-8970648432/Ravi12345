@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "4ff654cc-f782-48b4-b7a3-003fa5c86be7",
+		"name": "rmgyantra",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "addProject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var rand=Math.floor(Math.random() * 1000);\r",
+							"console.log(rand)\r",
+							"pm.globals.set(\"global\",\"Ravi\"+rand);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\t\r\n{\r\n  \"createdBy\": \"{{global}}\",\r\n  \"projectName\": \"Equalize {{global}}\",\r\n  \"status\": \"Completed\",\r\n  \"teamSize\": 300\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/addProject",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllProjects",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Testyantra\");\r",
+							"});\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"    pm.expect(jsonData[4].createdBy).to.eql(\"Varun\");\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{Port}}/projects",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSingleProject",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{Port}}/projects/TY_PROJ_203",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"projects",
+						"TY_PROJ_203"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProject",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"RRR\",\r\n  \"createdOn\": \"18/02/2022\",\r\n  \"projectId\": \"TY_Proj_0010\",\r\n  \"projectName\": \"vtiger\",\r\n  \"status\": \"created\",\r\n  \"teamSize\": 27\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/projects/TY_PROJ_202",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"projects",
+						"TY_PROJ_202"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProject",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{Port}}/projects/TY_PROJ_209",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"projects",
+						"TY_PROJ_209"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SDET29",
+			"value": ""
+		}
+	]
+}

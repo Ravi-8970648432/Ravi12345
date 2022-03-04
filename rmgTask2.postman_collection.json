@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "53f035c4-7a4b-419d-a719-1bc49b546a0c",
+		"name": "rmgTask2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateUSer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () { //status code\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {//Status code name as string\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {//Content-Type\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {//Response time\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Successful Message\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.username).to.eql(\"nithesh\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"designation\": \"SDET\",\r\n  \"dob\": \"25/05/1999\",\r\n  \"email\": \"nithesh@gmail.com\",\r\n  \"empName\": \"nithesh\",\r\n  \"experience\": 15,\r\n  \"mobileNo\": \"9888777657\",\r\n  \"project\": \"hdfc\",\r\n  \"role\": \"ROLE_ADMIN\",\r\n  \"username\": \"nithesh\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/employees",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllEmployees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{Port}}/employees",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUSer_InvalidMobileNum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () { //status code\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {//Status code name as string\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {//Content-Type\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var rand=Math.floor(Math.random() * 1000);\r",
+							"console.log(rand)\r",
+							"pm.globals.set(\"global\",rand);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"designation\": \"SDET\",\r\n  \"dob\": \"25/05/1999\",\r\n  \"email\": \"nithesh@gmail.com\",\r\n  \"empName\": \"nithesh\",\r\n  \"experience\": 15,\r\n  \"mobileNo\": \"9888777657111\",\r\n  \"project\": \"hdfc\",\r\n  \"role\": \"ROLE_ADMIN\",\r\n  \"username\": \"nithesh {{global}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/employees",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUSer_Ten_digit_MobileNum_with_zero",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var rand=Math.floor(Math.random() * 1000);\r",
+							"console.log(rand)\r",
+							"pm.globals.set(\"global\",rand);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"designation\": \"SDET\",\r\n  \"dob\": \"25/05/1999\",\r\n  \"email\": \"nithesh@gmail.com\",\r\n  \"empName\": \"nithesh\",\r\n  \"experience\": 15,\r\n  \"mobileNo\": \"0000000000\",\r\n  \"project\": \"hdfc\",\r\n  \"role\": \"ROLE_ADMIN\",\r\n  \"username\": \"nithesh {{global}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/employees",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUSer_Ten_inValidEmailID",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var rand=Math.floor(Math.random() * 1000);\r",
+							"console.log(rand)\r",
+							"pm.globals.set(\"global\",rand);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"designation\": \"SDET\",\r\n  \"dob\": \"25/05/1999\",\r\n  \"email\": \"nithesh\",\r\n  \"empName\": \"nithesh\",\r\n  \"experience\": 15,\r\n  \"mobileNo\": \"00000000ab\",\r\n  \"project\": \"hdfc\",\r\n  \"role\": \"ROLE_ADMIN\",\r\n  \"username\": \"nithesh {{global}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/employees",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Task2",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "d99f1126-02e2-4943-9d05-3f4d26da1d8b",
+		"name": "DataDrivenTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "dataDrivenCsv",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"deepak\",\r\n  \"createdOn\": \"string\",\r\n  \"projectId\": \"string\",\r\n  \"projectName\": \"{{ProjectName}}\",\r\n  \"status\": \"Created\",\r\n  \"teamSize\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8084/addProject",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DataDrivenJson",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"projectName\": \"{{projectName}}\",\r\n  \"status\": \"{{status}}\",\r\n  \"teamSize\": {{teamSize}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8084/addProject",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

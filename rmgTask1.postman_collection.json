@@ -1,0 +1,935 @@
+{
+	"info": {
+		"_postman_id": "ea8ecfaa-3fe7-445b-9059-3d0d20f2d751",
+		"name": "rmgTask1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "addSingleProjectWithCreatedStatus",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () { //status code\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {//Status code name as string\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {//Content-Type\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {//Response time\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Successful Message\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"Successfully Added\");\r",
+							"});\r",
+							"pm.test(\"Status\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"Created\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var rand=Math.floor(Math.random() * 1000);\r",
+							"console.log(rand)\r",
+							"pm.globals.set(\"global\",rand);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"deepak\",\r\n  \"createdOn\": \"string\",\r\n  \"projectId\": \"string\",\r\n  \"projectName\": \"deepak_pro-1 {{global}}\",\r\n  \"status\": \"Created\",\r\n  \"teamSize\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/addProject",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SingleProjectWithCreatedStatus",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {////Status code name as string\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {//Content-Type\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {//Response time\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"ProjectName\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.projectName).to.eql(\"deepak_pro-1 108\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{Port}}/projects/TY_PROJ_412",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"projects",
+						"TY_PROJ_412"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AllProjectsWithCreatedStatus",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {////Status code name as string\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {//Content-Type\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {//Response time\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{Port}}/projects",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProjectWitONGoingStatus",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var rand=Math.floor(Math.random() * 1000);\r",
+							"console.log(rand)\r",
+							"pm.globals.set(\"global\",rand);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () { //status code\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {//Status code name as string\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {//Content-Type\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {//Response time\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Successful Message\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"Successfully Added\");\r",
+							"});\r",
+							"pm.test(\"Status\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"On Going\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"deepak\",\r\n  \"createdOn\": \"string\",\r\n  \"projectId\": \"string\",\r\n  \"projectName\": \"deepak_pro-2 {{global}}\",\r\n  \"status\": \"On Going\",\r\n  \"teamSize\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/addProject",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProjectWithCompletedStatus",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () { //status code\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {//Status code name as string\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {//Content-Type\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {//Response time\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Successful Message\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"Successfully Added\");\r",
+							"});\r",
+							"pm.test(\"Status\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"Completed\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"deepak\",\r\n  \"createdOn\": \"string\",\r\n  \"projectId\": \"string\",\r\n  \"projectName\": \"deepak_pro-3\",\r\n  \"status\": \"Completed\",\r\n  \"teamSize\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/addProject",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProjectWithInValidStatus",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () { //status code\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {//Status code name as string\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {//Content-Type\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {//Response time\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var rand=Math.floor(Math.random() * 1000);\r",
+							"console.log(rand)\r",
+							"pm.globals.set(\"global\",rand);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"deepak\",\r\n  \"createdOn\": \"string\",\r\n  \"projectId\": \"string\",\r\n  \"projectName\": \"deepak_pro-3 {{global}}\",\r\n  \"status\": \"AAA\",\r\n  \"teamSize\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/addProject",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addDuplicateProject",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"deepak\",\r\n  \"createdOn\": \"string\",\r\n  \"projectId\": \"string\",\r\n  \"projectName\": \"deepak_pro-3\",\r\n  \"status\": \"Completed\",\r\n  \"teamSize\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/addProject",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProjectWithDuplicateID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"deepak\",\r\n  \"createdOn\": \"string\",\r\n  \"projectId\": \"TY_PROJ_425\",\r\n  \"projectName\": \"deepak_pro-3\",\r\n  \"status\": \"Completed\",\r\n  \"teamSize\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/addProject",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProjectWithOutCreatedBY",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var rand=Math.floor(Math.random() * 1000);\r",
+							"console.log(rand)\r",
+							"pm.globals.set(\"global\",rand);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () { //status code\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {//Status code name as string\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {//Content-Type\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {//Response time\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Successful Message\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"Successfully Added\");\r",
+							"});\r",
+							"pm.test(\"Status\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"Completed\");\r",
+							"});\r",
+							"pm.test(\"createdBy\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.createdBy).to.eql(\"\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"\",\r\n  \"createdOn\": \"string\",\r\n  \"projectId\": \"TY_PROJ_203\",\r\n  \"projectName\": \"deepak_pro-3 {{global}}\",\r\n  \"status\": \"Completed\",\r\n  \"teamSize\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/addProject",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addMultipleProject",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var rand=Math.floor(Math.random() * 1000);\r",
+							"console.log(rand)\r",
+							"pm.globals.set(\"global\",rand);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () { //status code\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {//Status code name as string\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {//Content-Type\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {//Response time\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Successful Message\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"Successfully Added\");\r",
+							"});\r",
+							"pm.test(\"Status\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"Created\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"deepak\",\r\n  \"createdOn\": \"string\",\r\n  \"projectId\": \"string\",\r\n  \"projectName\":[\"deepak_pro-1\",\"deepak_pro-2\",\"deepak_pro-3\",\"deepak_pro-4\"],\r\n  \"status\": \"Created\",\r\n  \"teamSize\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/employees",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProjectWithOutstatus",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var rand=Math.floor(Math.random() * 1000);\r",
+							"console.log(rand)\r",
+							"pm.globals.set(\"global\",rand);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () { //status code\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {//Status code name as string\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {//Content-Type\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {//Response time\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Successful Message\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"Successfully Added\");\r",
+							"});\r",
+							"pm.test(\"Status\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"deepak\",\r\n  \"createdOn\": \"string\",\r\n  \"projectId\": \"string\",\r\n  \"projectName\": \"deepak_pro-3 {{global}}\",\r\n  \"status\": \"\",\r\n  \"teamSize\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/addProject",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProjectWithFutureDate",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var rand=Math.floor(Math.random() * 1000);\r",
+							"console.log(rand)\r",
+							"pm.globals.set(\"global\",rand);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () { //status code\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {//Status code name as string\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {//Content-Type\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {//Response time\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Successful Message\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"Successfully Added\");\r",
+							"});\r",
+							"pm.test(\"Status\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"deepak\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"deepak\",\r\n  \"createdOn\": \"22/02/2022\",\r\n  \"projectId\": \"string\",\r\n  \"projectName\": \"deepak_pro-3 {{global}}\",\r\n  \"status\": \"deepak\",\r\n  \"teamSize\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/addProject",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modifyPRojectNAme",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () { //status code\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202]);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {//Status code name as string\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {//Content-Type\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {//Response time\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status\", function () {//Response body :json value check\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"Completed\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"deepak\",\r\n  \"createdOn\": \"string\",\r\n  \"projectId\": \"TY_PROJ_424\",\r\n  \"projectName\": \"Ravi_pro-3\",\r\n  \"status\": \"Completed\",\r\n  \"teamSize\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/projects/TY_PROJ_424",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"projects",
+						"TY_PROJ_424"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post Using jsonfile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/C:/Users/hp/Documents/emp.json"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/addProject",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post Using formData",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "createdBy",
+							"value": "Ravi",
+							"type": "text"
+						},
+						{
+							"key": "projectName",
+							"value": "vtiger1",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "created",
+							"type": "text"
+						},
+						{
+							"key": "teamSize",
+							"value": "25",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/addProject",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post Using params",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{Port}}/:p1?name=Ravi",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						":p1"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ravi"
+						}
+					],
+					"variable": [
+						{
+							"key": "p1",
+							"value": "projects"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostAndDelete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    let project=(jsonData.projectId);\r",
+							"\r",
+							"\r",
+							"    pm.globals.set(\"pid\", project);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var rand=Math.floor(Math.random() * 1000);\r",
+							"console.log(rand)\r",
+							"pm.globals.set(\"global\",rand);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"RaviKumar\",\r\n  \"projectName\": \"sample {{global}}\",\r\n  \"status\": \"created\",\r\n  \"teamSize\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{Port}}/addProject",
+					"host": [
+						"{{URL}}{{Port}}"
+					],
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/projects/{{pid}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"projects",
+						"{{pid}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Task1",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

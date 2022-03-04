@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "b7290009-459a-4ece-b26a-524ece7cf5bb",
+		"name": "End2End",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "addProject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    let pname=(jsonData.projectName);\r",
+							"\r",
+							"    pm.globals.set(\"projectname\", pname);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"createdBy\": \"deepak\",\r\n  \"projectName\": \"AirtelA\",\r\n  \"status\": \"Completed\",\r\n  \"teamSize\": 12\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8084/addProject",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"addProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createEmployee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"designation\": \"SDET\",\r\n  \"dob\": \"25/05/1999\",\r\n  \"email\": \"nithesh@gmail.com\",\r\n  \"empName\": \"nithesh\",\r\n  \"experience\": 15,\r\n  \"mobileNo\": \"9888777657\",\r\n  \"project\":\"{{projectname}}\",\r\n  \"role\": \"ROLE_ADMIN\",\r\n  \"username\": \"nithesh1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8084/employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postrequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    let eid=(jsonData.employeeId);\r",
+							"\r",
+							"    pm.globals.set(\"userid\", eid);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var rand=Math.floor(Math.random() * 1000);\r",
+							"\r",
+							"pm.globals.set(\"global\", rand);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"designation\": \"SDET\",\r\n  \"dob\": \"25/05/1999\",\r\n  \"email\": \"paven@gmail.com\",\r\n  \"empName\": \"nithesh\",\r\n  \"experience\": 15,\r\n  \"mobileNo\": \"9888777657\",\r\n  \"project\": \"pavan {{global}}\",\r\n  \"role\": \"ROLE_ADMIN\",\r\n  \"username\": \"pavan {{global}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8084/employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/employees/{{userid}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"employees",
+						"{{userid}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
